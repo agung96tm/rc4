@@ -14,7 +14,7 @@
     "require": {},
     "autoload" : {
         "psr-4" : {
-            "rc4\\" : "src"
+            "agung96tm\\rc4\\" : "src/"
         }
     }
 }

@@ -1,5 +1,5 @@
 <?php 
-namespace rc4;
+namespace agung96tm\rc4;
 
 class crptoRC4
 {
