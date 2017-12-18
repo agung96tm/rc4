@@ -1,0 +1,20 @@
+{
+    "name": "agung96tm/rc4",
+    "description": "encrypt and decrypt using algoritm rc4",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "agung96tm",
+            "email": "agung.96tm@gmail.com",
+            "homepage": "https://github.com/agung96tm",
+            "role": "Developer"
+        }
+    ],
+    "require": {},
+    "autoload" : {
+        "psr-4" : {
+            "rc4\\" : "src"
+        }
+    }
+}
