@@ -13,7 +13,7 @@ use agung96tm\rc4\crptoRC4;<br />
 $rc4_example = new crptoRC4('123123');<br />
 <br />
 
-// if you wont to change key<br />
+// if you want to change key<br />
 // $rc4_example->setKey('321321');<br />
 <br />
 
