@@ -4,37 +4,43 @@ encrypt and decrypt using algoritm rc4
 require "src/crptoRC4.php";
 use agung96tm\rc4\crptoRC4;
 
-// EXAMPLE USING RC4
+<h2>EXAMPLE USING RC4</h2>
 
-$rc4_example = new crptoRC4('123123');
+$rc4_example = new crptoRC4('123123');<br />
+<br />
 
-// IF YOU WANT TO CHANGE PASSWORD
-// $rc4_example->setKey('321321');
+// IF YOU WANT TO CHANGE PASSWORD<br />
+// $rc4_example->setKey('321321');<br />
+<br />
+
+// -----------------------<br />
+	// ENCRYPT<br />
+// -----------------------<br />
+<br />
+
+// ECHO CHIPER<br />
+$result = $rc4_example->getChiper('helo world');<br />
+echo $result;<br />
+<br />
+
+// ALTERNATIVE<br />
+// echo $rc4_example->getChiperText();<br />
+<br />
+
+// -----------------------<br />
+	// DECRYPT<br />
+// -----------------------<br />
+<br />
+
+// ECHO PLAIN<br />
+echo $rc4_example->getChiper('bego loh');<br />
+<br />
+
+// ALTERNATIVE<br />
+// echo $rc4_example->getPlainText();<br />
+<br />
 
 
-// -----------------------
-	// ENCRYPT
-// -----------------------
-
-// ECHO CHIPER
-$result = $rc4_example->getChiper('helo world');
-echo $result;
-
-// ALTERNATIVE
-// echo $rc4_example->getChiperText();
-
-
-// -----------------------
-	// DECRYPT
-// -----------------------
-
-// ECHO PLAIN
-echo $rc4_example->getChiper('bego loh');
-
-// ALTERNATIVE
-// echo $rc4_example->getPlainText();
-
-
-// I LEARN THIS ENCRYPT (RC4) FROM THIS WEBSITE :
-// https://matriasiyas.wordpress.com/2014/01/19/pengertian-algoritma-rc4/
+// I LEARN THIS ENCRYPT (RC4) FROM THIS WEBSITE :<br />
+// https://matriasiyas.wordpress.com/2014/01/19/pengertian-algoritma-rc4/<br />
 // thanks you matriasiyas :D
