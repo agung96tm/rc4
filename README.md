@@ -45,6 +45,6 @@ echo $rc4_example->getPlain($result);<br />
 <br />
 
 
-// I LEARN THIS RC4 FROM THIS WEBSITE :<br />
+// I LEARN RC4 FROM THIS WEBSITE :<br />
 // https://matriasiyas.wordpress.com/2014/01/19/pengertian-algoritma-rc4/<br />
 // thanks you matriasiyas :D
