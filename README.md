@@ -1,10 +1,12 @@
 # rc4
 encrypt and decrypt using algoritm rc4
 
-require "src/crptoRC4.php";
-use agung96tm\rc4\crptoRC4;
 
-<h2>EXAMPLE USING RC4</h2>
+
+<h3>EXAMPLE USING RC4</h3>
+
+require "src/crptoRC4.php";<br />
+use agung96tm\rc4\crptoRC4;<br />
 
 $rc4_example = new crptoRC4('123123');<br />
 <br />
