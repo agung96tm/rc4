@@ -7,11 +7,13 @@ encrypt and decrypt using algoritm rc4
 
 require "src/crptoRC4.php";<br />
 use agung96tm\rc4\crptoRC4;<br />
+<br />
 
+// include key<br />
 $rc4_example = new crptoRC4('123123');<br />
 <br />
 
-// IF YOU WANT TO CHANGE PASSWORD<br />
+// if you wont to change key<br />
 // $rc4_example->setKey('321321');<br />
 <br />
 
