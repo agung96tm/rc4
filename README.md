@@ -22,12 +22,12 @@ $rc4_example = new crptoRC4('123123');<br />
 // -----------------------<br />
 <br />
 
-// ECHO CHIPER<br />
+// echo chiper<br />
 $result = $rc4_example->getChiper('helo world');<br />
 echo $result;<br />
 <br />
 
-// ALTERNATIVE<br />
+// alternative<br />
 // echo $rc4_example->getChiperText();<br />
 <br />
 
@@ -36,11 +36,11 @@ echo $result;<br />
 // -----------------------<br />
 <br />
 
-// ECHO PLAIN<br />
-echo $rc4_example->getChiper('bego loh');<br />
+// echo plain<br />
+echo $rc4_example->getPlain($result);<br />
 <br />
 
-// ALTERNATIVE<br />
+// alternative<br />
 // echo $rc4_example->getPlainText();<br />
 <br />
 
