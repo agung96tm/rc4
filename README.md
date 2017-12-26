@@ -19,7 +19,7 @@ $rc4_example = new crptoRC4('this_key');<br />
 <br />
 
 // echo chiper<br />
-$hasil = $rc4->encrypt('agung96tm');<br />
+$hasil = $rc4_example->encrypt('agung96tm');<br />
 echo $hasil;<br />
 <br />
 
@@ -29,10 +29,10 @@ echo $hasil;<br />
 <br />
 
 // echo plain<br />
-echo $rc4->decrypt($hasil);<br />
+echo $rc4_example->decrypt($hasil);<br />
 <br />
 
 // I LEARN RC4 FROM THIS WEBSITE :<br />
-// https://matriasiyas.wordpress.com/2014/01/19/pengertian-algoritma-rc4/<br />
-// ENKRIPSI MENGGUNAKAN ALGORITMA RC4 (Arif Nur Afiati Rofi’ah)<br />
+// (1) https://matriasiyas.wordpress.com/2014/01/19/pengertian-algoritma-rc4/<br />
+// (2) ENKRIPSI MENGGUNAKAN ALGORITMA RC4 (Arif Nur Afiati Rofi’ah)<br />
 // thanks you
