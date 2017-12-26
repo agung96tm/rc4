@@ -10,11 +10,7 @@ use agung96tm\rc4\crptoRC4;<br />
 <br />
 
 // include key<br />
-$rc4_example = new crptoRC4('123123');<br />
-<br />
-
-// if you want to change key<br />
-// $rc4_example->setKey('321321');<br />
+$rc4_example = new crptoRC4('this_key');<br />
 <br />
 
 // -----------------------<br />
@@ -23,12 +19,8 @@ $rc4_example = new crptoRC4('123123');<br />
 <br />
 
 // echo chiper<br />
-$result = $rc4_example->getChiper('helo world');<br />
-echo $result;<br />
-<br />
-
-// alternative<br />
-// echo $rc4_example->getChiperText();<br />
+$hasil = $rc4->encrypt('agung96tm');<br />
+echo $hasil;<br />
 <br />
 
 // -----------------------<br />
@@ -37,14 +29,10 @@ echo $result;<br />
 <br />
 
 // echo plain<br />
-echo $rc4_example->getPlain($result);<br />
+echo $rc4->decrypt($hasil);<br />
 <br />
-
-// alternative<br />
-// echo $rc4_example->getPlainText();<br />
-<br />
-
 
 // I LEARN RC4 FROM THIS WEBSITE :<br />
 // https://matriasiyas.wordpress.com/2014/01/19/pengertian-algoritma-rc4/<br />
-// thanks you matriasiyas :D
+// ENKRIPSI MENGGUNAKAN ALGORITMA RC4 (Arif Nur Afiati Rofi’ah)<br />
+// thanks you
