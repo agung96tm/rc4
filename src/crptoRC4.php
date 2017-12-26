@@ -1,187 +1,82 @@
 <?php 
 namespace agung96tm\rc4;
 
-class crptoRC4
-{
-	private $s, $k;
-	private $panjang;
-	private $plaintext;
-	private $pseudoRandomByte;
-	private $chipertext;
+class crptoRC4 {
 	private $key;
+	private $ciphertext;
+	private $plaintext;
+	private $s;
 
 	public function __construct($key)
 	{
 		$this->key = $key;
 	}
 
-	/*
-	 |------------------------------------------------------
-	 | Set And Get
-	 |------------------------------------------------------
-	 */
-
-	public function setKey($key)
+	public function encrypt($plain)
 	{
-		$this->key = $key;
-	}
+		$this->plaintext = $plain;
+		$this->acakSBox();
 
-	public function getKey()
-	{
-		return $this->key;
-	}
+		// 
+		$this->chipertext = $this->pseudoRandomWithXor($plain);
 
-	public function getPlainText()
-	{
-		return $this->plaintext;
-	}
-
-	public function getChiperText()
-	{
 		return $this->chipertext;
 	}
 
-	/*
-	 |-------------------------------------------------------
-	 */
-
-
-	// generate S-Box (Array S)
-	private function setSBoxS()
+	public function decrypt($chiper)
 	{
-		for ($i=0; $i < $this->panjang; $i++) { 
-			$this->s[$i] = $i;
-		}
+		$this->ciphertext = $chiper;
+		$this->acakSBox();
+
+		$this->plaintext = $this->pseudoRandomWithXor($chiper);
+		return $this->plaintext;
 	}
 
-	// generate K-Box (Array K)
-	private function setSBoxK()
+	private function pseudoRandomWithXor($data)
 	{
-		for ($i=0; $i < count($this->s); $i++) { 
-			$this->k[$i] = $this->key[($i % strlen($this->key))];
+		$n = strlen($data);
+		$i = $j = 0;
+
+		$data = str_split($data, 1);
+
+		for($m = 0 ; $m < $n ; $m++) {
+			$i = ($i + 1) % 256;
+			$j = ($j + $this->s[$i]) % 256;
+
+			// swap
+			$this->swap($i, $j);
+			
+			$char = ord($data[$m]);
+			$t = ($this->s[$i] + $this->s[$j]) % 256;
+			
+			$char = $t ^ $char;
+			$data[$m] = chr($char);
 		}
 
+		$data = implode('', $data);
+
+		return $data;
 	}
 
-	// Random S-Box 
-	private function processRandomSBox()
+	private function acakSBox()
 	{
+		$this->s = range(0, 255);
 		$j = 0;
+		$n = strlen($this->key);
 
-		for ($i=0; $i < $this->panjang; $i++) {
-			$j = ($j + $this->s[$i] + $this->k[$i]) % $this->panjang;
+		for($i = 0 ; $i < 256 ; $i++) {
+			$char = ord($this->key[$i % $n]);
+			$j = ($j + $this->s[$i] + $char) % 256;
+
 			$this->swap($i, $j);
 		}
 	}
 
-	// Swap value in array (only property $this->s)
 	private function swap($i, $j)
 	{
-		$nil_i = $this->s[$i];
-		// print_r($nil_i);
-		// die();
+		$nil = $this->s[$i];
 		$this->s[$i] = $this->s[$j];
-		$this->s[$j] = $nil_i;
+		$this->s[$j] = $nil;
 	}
-
-
-	// get chiper
-	public function getChiper($plaintext)
-	{
-		$this->plaintext = $plaintext;
-		$this->panjang = strlen($plaintext);
-		
-		$this->setSBoxS();
-		$this->setSBoxK();
-		$this->processRandomSBox();
-
-		if(is_null($this->pseudoRandomByte)) {
-			$this->setPseudoRandomByte($this->plaintext);
-		}
-		
-		$hasil = $this->proses($this->plaintext);
-		$this->chipertext = $hasil;
-
-		return $hasil;
-	}
-
-	// get plain
-	public function getPlain($chipertext)
-	{
-		$this->chipertext = $chipertext;
-		$this->panjang = strlen($chipertext);
-
-		$this->setSBoxS();
-		$this->setSBoxK();
-		$this->processRandomSBox();
-
-		if(is_null($this->pseudoRandomByte)) {
-			$this->setPseudoRandomByte($this->chipertext);
-		}
-
-		$hasil = $this->proses($this->chipertext);
-		$this->plaintext = $hasil;
-
-		return $hasil;
-	}
-
-	// Processing, $jenis = property, $this->chipertext or $this->plaintext
-	public function proses($jenis)
-	{
-		for ($i=0; $i < strlen($jenis); $i++) { 
-			
-			$bin_char = $this->charToBin($jenis[$i]);
-			$bin_pseudo_char = $this->charToBin($this->pseudoRandomByte[$i]);
-			
-			$hasil_xor = $this->xor($bin_char, $bin_pseudo_char);
-			
-			$hasil_akhir[$i] = $hasil_xor;
-		}
-
-		return implode('', $hasil_akhir);
-	}
-
-	// Xor with char (in binner) and char pseudo (in binner)
-	// return string
-	private function xor($bin_char, $bin_pseudo_char)
-	{
-		for ($i=0; $i < strlen($bin_char) ; $i++) { 
-			$hasil[$i] = intval($bin_char[$i]) ^ intval($bin_pseudo_char[$i]);
-		}
-
-		$ascii = bindec(implode('', $hasil));
-		
-		return chr($ascii);
-	}
-
-	// Make char to binner and add 0 in front (if char.length != 8)
-	private function charToBin($char)
-	{
-		$bin_char = decbin(ord($char));
-		
-		while(strlen($bin_char) != 8) {
-			$bin_char = '0' . $bin_char;
-		}
-
-		return $bin_char;
-	}
-
-	// generate pseudo random
-	private function setPseudoRandomByte($jenis)
-	{
-		$i = 0;
-		$j = 0;
-
-		for ($p_data = 0; $p_data < strlen($jenis); $p_data++) { 
-
-
-			$i = ($i + 1) % strlen($jenis);
-			$j = ($j + $this->s[$i]) % strlen($jenis);
-			$this->swap($i, $j);
-
-			$t = ($this->s[$i] + $this->s[$j]) % strlen($jenis);
-			$this->pseudoRandomByte[$p_data] = $this->s[$t];
-		}
-	}
-}
+} 
 ?>
